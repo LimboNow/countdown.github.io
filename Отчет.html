@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Отсчёт до 1 июня 2026</title>
+  <style>
+    html,body{
+      margin:0;
+      height:100%;
+      background:#fff;
+      color:#000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family:system-ui, sans-serif;
+      font-weight:700;
+      font-size:8vw;
+      user-select:none;
+    }
+  </style>
+</head>
+<body>
+  <div id="timer">00:00:00:00</div>
+
+  <script>
+    const target = new Date("2026-06-01T00:00:00+03:00");
+    const el = document.getElementById("timer");
+
+    function pad(n){return String(n).padStart(2,'0')}
+    function tick(){
+      const now = new Date();
+      let diff = target - now;
+      if (diff < 0) diff = 0;
+      const d = Math.floor(diff/86400000);
+      const h = Math.floor((diff%86400000)/3600000);
+      const m = Math.floor((diff%3600000)/60000);
+      const s = Math.floor((diff%60000)/1000);
+      el.textContent = `${pad(d)}д ${pad(h)}:${pad(m)}:${pad(s)}`;
+    }
+    tick();
+    setInterval(tick,1000);
+  </script>
+</body>
+</html>
